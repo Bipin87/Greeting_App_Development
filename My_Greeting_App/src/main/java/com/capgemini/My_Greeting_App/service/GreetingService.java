@@ -4,6 +4,7 @@ import com.capgemini.My_Greeting_App.entities.GreetingEntity;
 import com.capgemini.My_Greeting_App.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,6 +42,11 @@ public class GreetingService {
     // Find Greeting message by id
     public Optional<GreetingEntity> findGreetingById(Long id) {
         return greetingRepository.findById(id);
+    }
+
+    // List all Greeting messages in repository
+    public List<GreetingEntity> getAllGreetings() {
+        return greetingRepository.findAll();
     }
 
 

@@ -6,6 +6,9 @@ import com.capgemini.My_Greeting_App.service.GreetingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("greet/hello")
 public class GreetingServiceController {
@@ -22,7 +25,7 @@ public class GreetingServiceController {
     }
 
     // GET request to greet with firstname and lastname
-    @GetMapping("/name")
+    @GetMapping("/data")
     public String greetWithFullName(@RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName){
         return greetingService.customGreetingMessage(firstName,lastName);
     }
@@ -38,11 +41,15 @@ public class GreetingServiceController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GreetingEntity> getGreetingById(@PathVariable Long id) {
-        return greetingService.findGreetingById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public Optional<GreetingEntity> getGreetingById(@PathVariable Long id) {
+        return greetingService.findGreetingById(id);
     }
+
+    @GetMapping("/all")
+    public List<GreetingEntity> getAllGreetings() {
+        return greetingService.getAllGreetings();
+    }
+
 
 
 }
