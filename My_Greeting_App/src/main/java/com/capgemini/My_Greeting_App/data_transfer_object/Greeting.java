@@ -1,12 +1,16 @@
 package com.capgemini.My_Greeting_App.data_transfer_object;
 
 public class Greeting {
+
     private String message;
 
-    public Greeting(String message){
+    // Default constructor (required by JPA)
+    public Greeting() {}
 
+    public Greeting(String message) {
         this.message = message;
     }
+
 
     public String getMessage() {
         return message;

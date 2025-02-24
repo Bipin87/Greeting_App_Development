@@ -1,9 +1,18 @@
 package com.capgemini.My_Greeting_App.service;
 
+import com.capgemini.My_Greeting_App.entities.GreetingEntity;
+import com.capgemini.My_Greeting_App.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GreetingService {
+    private final GreetingRepository greetingRepository;
+
+    // Constructor-based Dependency Injection
+    public GreetingService(GreetingRepository greetingRepository) {
+        this.greetingRepository = greetingRepository;
+    }
+
     public String getGreetingMessage(){
         return "Hello World";
     }
@@ -19,5 +28,12 @@ public class GreetingService {
         }else {
             return "Hello World";
         }
+
     }
+    // Save Greeting Message
+    public GreetingEntity saveGreeting(String message) {
+        GreetingEntity greeting = new GreetingEntity(message);
+        return greetingRepository.save(greeting);
+    }
+
 }

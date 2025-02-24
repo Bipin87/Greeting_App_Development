@@ -1,14 +1,14 @@
 package com.capgemini.My_Greeting_App.controller;
 
+import com.capgemini.My_Greeting_App.data_transfer_object.UserDTO;
+import com.capgemini.My_Greeting_App.entities.GreetingEntity;
 import com.capgemini.My_Greeting_App.service.GreetingService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("greet/hello")
 public class GreetingServiceController {
+    // attribute
     private final GreetingService greetingService;
 
     public GreetingServiceController(GreetingService greetingService){
@@ -21,9 +21,19 @@ public class GreetingServiceController {
     }
 
     // GET request to greet with firstname and lastname
-    @GetMapping("/data")
+    @GetMapping("/name")
     public String greetWithFullName(@RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName){
         return greetingService.customGreetingMessage(firstName,lastName);
+    }
+    @PostMapping("/post")
+    public String getCustomGreetingMessageWithPost(@RequestBody UserDTO user){
+        return greetingService.customGreetingMessage(user.getFirstName(), user.getLastName());
+    }
+
+    // Save Greeting Message
+    @PostMapping("/save")
+    public GreetingEntity saveGreeting(@RequestBody String message) {
+        return greetingService.saveGreeting(message);
     }
 
 
