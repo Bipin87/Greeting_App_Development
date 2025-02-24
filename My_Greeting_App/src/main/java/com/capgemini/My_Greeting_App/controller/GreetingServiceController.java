@@ -3,6 +3,7 @@ package com.capgemini.My_Greeting_App.controller;
 import com.capgemini.My_Greeting_App.data_transfer_object.UserDTO;
 import com.capgemini.My_Greeting_App.entities.GreetingEntity;
 import com.capgemini.My_Greeting_App.service.GreetingService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,6 +35,13 @@ public class GreetingServiceController {
     @PostMapping("/save")
     public GreetingEntity saveGreeting(@RequestBody String message) {
         return greetingService.saveGreeting(message);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GreetingEntity> getGreetingById(@PathVariable Long id) {
+        return greetingService.findGreetingById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 

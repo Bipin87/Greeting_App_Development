@@ -4,6 +4,8 @@ import com.capgemini.My_Greeting_App.entities.GreetingEntity;
 import com.capgemini.My_Greeting_App.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class GreetingService {
     private final GreetingRepository greetingRepository;
@@ -35,5 +37,11 @@ public class GreetingService {
         GreetingEntity greeting = new GreetingEntity(message);
         return greetingRepository.save(greeting);
     }
+
+    // Find Greeting message by id
+    public Optional<GreetingEntity> findGreetingById(Long id) {
+        return greetingRepository.findById(id);
+    }
+
 
 }
