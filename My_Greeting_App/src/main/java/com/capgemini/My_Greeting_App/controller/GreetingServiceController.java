@@ -62,6 +62,10 @@ public class GreetingServiceController {
     }
 
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteGreeting(@PathVariable Long id) {
+        greetingService.deleteGreeting(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

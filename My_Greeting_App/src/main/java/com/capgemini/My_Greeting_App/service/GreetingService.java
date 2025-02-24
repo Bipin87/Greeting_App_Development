@@ -49,6 +49,7 @@ public class GreetingService {
         return greetingRepository.findAll();
     }
 
+    // Update the Greeting message in repository
     public GreetingEntity updateGreeting(Long id, String newMessage) {
         return greetingRepository.findById(id)
                 .map(greeting -> {
@@ -56,6 +57,12 @@ public class GreetingService {
                     return greetingRepository.save(greeting);
                 }).orElseThrow(() -> new RuntimeException("Greeting not found"));
     }
+
+    // Delete Greeting message by ID in the repository
+    public void deleteGreeting(Long id) {
+        greetingRepository.deleteById(id);
+    }
+
 
 
 
