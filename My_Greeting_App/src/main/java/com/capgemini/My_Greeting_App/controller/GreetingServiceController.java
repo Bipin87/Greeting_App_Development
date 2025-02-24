@@ -50,6 +50,18 @@ public class GreetingServiceController {
         return greetingService.getAllGreetings();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<GreetingEntity> updateGreeting(
+            @PathVariable Long id, @RequestParam String message) {
+        try {
+            GreetingEntity updatedGreeting = greetingService.updateGreeting(id, message);
+            return ResponseEntity.ok(updatedGreeting);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 
 
 }
